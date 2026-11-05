@@ -1,9 +1,10 @@
 import { useState, type FormEvent } from 'react';
 import type { Trace } from './data';
 import { readRecord, traceRecordId, updateRecord } from './courseStore';
+import { traceAtDay } from './traceAtDay';
 import { reportText, summarizeProgress } from './progressReport';
 
-type Reply = { prompt: string; traceId: string; text: string };
+type Reply = { day: number; prompt: string; traceId: string; text: string };
 
 function makeReply(question: string, trace: Trace) {
   const summary = summarizeProgress(trace);
@@ -21,8 +22,10 @@ function makeReply(question: string, trace: Trace) {
   return `By day ${summary.day}, trace ${trace.id} shows ${summary.mastered} of ${summary.total} concepts mastered. Latest activity: ${summary.latestEvent}.${change}${next}`;
 }
 
-export function TeacherHome({ trace, resolveTrace, openTrace, openDetails }: {
+export function TeacherHome({ trace, selectedTraceId, day, resolveTrace, openTrace, openDetails }: {
   trace: Trace | null;
+  selectedTraceId?: string;
+  day: number;
   resolveTrace: (id: string) => Promise<Trace>;
   openTrace: (id: string) => void;
   openDetails: () => void;
@@ -33,14 +36,14 @@ export function TeacherHome({ trace, resolveTrace, openTrace, openDetails }: {
   const [error, setError] = useState('');
 
   async function ask(prompt: string) {
-    if (!prompt.trim() || !trace || busy) return;
+    if (!prompt.trim() || !selectedTraceId || busy) return;
     const number = prompt.match(/\b(?:trace|student)\s*#?\s*(\d+)\b/i)?.[1];
-    const id = number ? String(Number(number)) : trace.id;
+    const id = number ? String(Number(number)) : selectedTraceId;
     setBusy(true);
     setError('');
     try {
-      const target = id === trace.id ? trace : await resolveTrace(id);
-      setReply({ prompt, traceId: target.id, text: makeReply(prompt, target) });
+      const target = trace?.id === id ? trace : traceAtDay(await resolveTrace(id), day);
+      setReply({ day, prompt, traceId: id, text: target ? makeReply(prompt, target) : `Trace ${id} has no recorded observations through day ${day}.` });
       setQuestion('');
     } catch {
       setError(`Trace ${id} could not be loaded. Choose a trace in the selector or try another number.`);
@@ -56,14 +59,14 @@ export function TeacherHome({ trace, resolveTrace, openTrace, openDetails }: {
       <p className="teacher-subtitle">Ask about progress, assessments, or misconceptions. Use a trace number to look up a different student.</p>
       <form className="teacher-prompt" onSubmit={e => { e.preventDefault(); void ask(question); }}>
         <input aria-label="Ask about a student" value={question} placeholder="Give me an update on trace 206" onChange={e => setQuestion(e.target.value)}/>
-        <button className="button primary" disabled={!trace || busy || !question.trim()}>{busy ? 'Looking up…' : 'Ask'}</button>
+        <button className="button primary" disabled={!selectedTraceId || busy || !question.trim()}>{busy ? 'Looking up…' : 'Ask'}</button>
       </form>
       <div className="course-row teacher-suggestions">
         {['Update on this student', 'Summarize assessments', 'What misconceptions are active?'].map(prompt =>
-          <button className="button" key={prompt} disabled={!trace || busy} onClick={() => void ask(prompt)}>{prompt}</button>)}
+          <button className="button" key={prompt} disabled={!selectedTraceId || busy} onClick={() => void ask(prompt)}>{prompt}</button>)}
       </div>
       {error && <p role="alert">{error}</p>}
-      {reply && <div className="teacher-replies" aria-live="polite">
+      {reply?.day === day && <div className="teacher-replies" aria-live="polite">
         <article>
           <p className="teacher-question">{reply.prompt}</p>
           <p className="eyebrow">Recorded trace {reply.traceId}</p><p>{reply.text}</p>
@@ -72,11 +75,11 @@ export function TeacherHome({ trace, resolveTrace, openTrace, openDetails }: {
       </div>}
       <p className="minor">Local answers are drawn from the recorded simulator data.</p>
     </section>
-    {trace && <StudentBrief key={traceRecordId(trace)} trace={trace} openDetails={openDetails}/>}
+    {trace && <StudentBrief key={traceRecordId(trace)} trace={trace} day={day} openDetails={openDetails}/>}
   </div>;
 }
 
-function StudentBrief({ trace, openDetails }: { trace: Trace; openDetails: () => void }) {
+function StudentBrief({ trace, day, openDetails }: { trace: Trace; day: number; openDetails: () => void }) {
   const summary = summarizeProgress(trace);
   const [audience, setAudience] = useState<'student' | 'parent' | null>(null);
   const [status, setStatus] = useState('');
@@ -92,12 +95,13 @@ function StudentBrief({ trace, openDetails }: { trace: Trace; openDetails: () =>
       <button className="button" onClick={() => setAudience('parent')}>Send report to parent</button>
     </div>
     {status && <p role="status">{status}</p>}
-    {audience && <ReportEditor key={audience} trace={trace} audience={audience} close={() => setAudience(null)} onPublish={() => { setAudience(null); setStatus('Report published to the local Student view.'); }}/>}
+    {audience && <ReportEditor key={audience + day} trace={trace} day={day} audience={audience} close={() => setAudience(null)} onPublish={() => { setAudience(null); setStatus('Report published to the local Student view.'); }}/>}
   </section>;
 }
 
-function ReportEditor({ trace, audience, close, onPublish }: {
+function ReportEditor({ trace, day, audience, close, onPublish }: {
   trace: Trace;
+  day: number;
   audience: 'student' | 'parent';
   close: () => void;
   onPublish: () => void;
@@ -122,7 +126,7 @@ function ReportEditor({ trace, audience, close, onPublish }: {
 
   function publish() {
     try {
-      updateRecord(id, current => ({ ...current, reports: [{ id: crypto.randomUUID(), ...draft }, ...current.reports] }));
+      updateRecord(id, current => ({ ...current, reports: [{ id: crypto.randomUUID(), day, ...draft }, ...current.reports] }));
       onPublish();
     } catch { setError('Browser storage could not save the report.'); }
   }

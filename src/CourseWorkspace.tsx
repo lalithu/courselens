@@ -6,8 +6,10 @@ import { eventStyles, mastery } from './domain';
 export type CourseView = 'teacher' | 'student' | 'canvas';
 type Action = 'evidence' | 'feedback' | 'options';
 
-export function CourseWorkspace({ view, trace, event, conceptId }: {
+export function CourseWorkspace({ view, trace, event, conceptId, day, endDay }: {
   view: CourseView;
+  day: number;
+  endDay: number;
   trace: Trace | null;
   event: TraceEvent | null;
   conceptId: string;
@@ -15,17 +17,23 @@ export function CourseWorkspace({ view, trace, event, conceptId }: {
   if (view === 'canvas') return <CanvasPreview/>;
   if (!trace) return view === 'student' ? <section className="panel course-panel">Select a trace to open the student view.</section> : null;
   const recordId = traceRecordId(trace);
-  return <TraceWorkspace key={recordId} recordId={recordId} view={view} trace={trace} event={event} conceptId={conceptId}/>;
+  return <TraceWorkspace key={recordId} recordId={recordId} view={view} trace={trace} event={event} conceptId={conceptId} day={day} endDay={endDay}/>;
 }
 
-function TraceWorkspace({ view, trace, event, conceptId, recordId }: {
+function TraceWorkspace({ view, trace, event, conceptId, recordId, day, endDay }: {
   view: 'teacher' | 'student';
+  day: number;
+  endDay: number;
   trace: Trace;
   event: TraceEvent | null;
   conceptId: string;
   recordId: string;
 }) {
   const [record, setRecord] = useState(() => readRecord(recordId));
+  const isVisible = (item: { day?: number }) => item.day === undefined ? day === endDay : item.day <= day;
+  const observations = record.observations.filter(isVisible);
+  const feedback = record.feedback.filter(isVisible);
+  const reports = record.reports.filter(isVisible);
   const [action, setAction] = useState<Action | null>(null);
   const [message, setMessage] = useState('');
   const snapshot = (view === 'teacher' ? trace.snapshots.find(item => item.id === event?.snapshotId) : undefined) ?? trace.snapshots.at(-1)!;
@@ -49,9 +57,9 @@ function TraceWorkspace({ view, trace, event, conceptId, recordId }: {
         </details>
       </section>
       <section className="panel course-panel"><p className="eyebrow">Approved feedback</p><h2>What to practice next</h2>
-        {record.feedback.length ? <ul className="course-list">{record.feedback.map(item => <li key={item.id}><strong>{item.concept}</strong><span>{item.event}</span><p>{item.text}</p></li>)}</ul> : <p>No teacher feedback has been approved for this trace.</p>}
+        {feedback.length ? <ul className="course-list">{feedback.map(item => <li key={item.id}><strong>{item.concept}</strong><span>{item.event}</span><p>{item.text}</p></li>)}</ul> : <p>No teacher feedback has been approved for this trace.</p>}
         <h2>Progress reports</h2>
-        {record.reports.length ? <ul className="course-list">{record.reports.map(report => <li key={report.id}><strong>{report.subject}</strong><p>{report.body}</p></li>)}</ul> : <p>No progress reports have been published for this trace.</p>}
+        {reports.length ? <ul className="course-list">{reports.map(report => <li key={report.id}><strong>{report.subject}</strong><p>{report.body}</p></li>)}</ul> : <p>No progress reports have been published for this trace.</p>}
       </section>
     </div>;
   }
@@ -66,15 +74,15 @@ function TraceWorkspace({ view, trace, event, conceptId, recordId }: {
       </div>
     </div>
     {message && <p role="status">{message}</p>}
-    {!!record.observations.length && <details><summary>Teacher observations ({record.observations.length})</summary>
-      <ul className="course-list">{record.observations.map(item => <li key={item.id}>
+    {!!observations.length && <details><summary>Teacher observations ({observations.length})</summary>
+      <ul className="course-list">{observations.map(item => <li key={item.id}>
         <strong>{item.concept}</strong><span>{item.event}</span><p>{item.text}</p>
         {item.attachment && <a href={item.attachment.url} download={item.attachment.name}>{item.attachment.name}</a>}
       </li>)}</ul>
     </details>}
     {action && <ActionForm key={action} action={action} concept={conceptLabel} event={eventLabel} close={() => setAction(null)}
       save={(text, attachment) => {
-        const item = { id: crypto.randomUUID(), text, concept: conceptLabel, event: eventLabel };
+        const item = { id: crypto.randomUUID(), day, text, concept: conceptLabel, event: eventLabel };
         setRecord(updateRecord(recordId, current => action === 'evidence'
           ? { ...current, observations: [{ ...item, attachment }, ...current.observations] }
           : { ...current, feedback: [item, ...current.feedback] }));

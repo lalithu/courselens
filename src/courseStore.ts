@@ -1,9 +1,9 @@
 import type { Trace } from './data';
 
 export type Attachment = { name: string; url: string };
-export type Observation = { id: string; text: string; event: string; concept: string; attachment?: Attachment };
-export type Feedback = { id: string; text: string; event: string; concept: string };
-export type StudentReport = { id: string; subject: string; body: string };
+export type Observation = { id: string; day?: number; text: string; event: string; concept: string; attachment?: Attachment };
+export type Feedback = { id: string; day?: number; text: string; event: string; concept: string };
+export type StudentReport = { id: string; day?: number; subject: string; body: string };
 export type CourseRecord = {
   observations: Observation[];
   feedback: Feedback[];

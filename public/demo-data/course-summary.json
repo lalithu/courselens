@@ -1,4 +1,5 @@
 {
+  "lastDay": 34,
   "traceCount": 3,
   "snapshotCount": 24,
   "eventCount": 24,
@@ -15,177 +16,527 @@
     {
       "day": 0,
       "mean": 11.111111111111112,
-      "count": 3
+      "count": 3,
+      "median": 16.666666666666668,
+      "eventsThroughDay": 3,
+      "snapshotsThroughDay": 3,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 0,
+        "homework": 0,
+        "office_hours": 0,
+        "quiz": 0
+      }
     },
     {
       "day": 1,
       "mean": 11.111111111111112,
-      "count": 3
+      "count": 3,
+      "median": 16.666666666666668,
+      "eventsThroughDay": 3,
+      "snapshotsThroughDay": 3,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 0,
+        "homework": 0,
+        "office_hours": 0,
+        "quiz": 0
+      }
     },
     {
       "day": 2,
       "mean": 11.111111111111112,
-      "count": 3
+      "count": 3,
+      "median": 16.666666666666668,
+      "eventsThroughDay": 3,
+      "snapshotsThroughDay": 3,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 0,
+        "homework": 0,
+        "office_hours": 0,
+        "quiz": 0
+      }
     },
     {
       "day": 3,
       "mean": 11.111111111111112,
-      "count": 3
+      "count": 3,
+      "median": 16.666666666666668,
+      "eventsThroughDay": 3,
+      "snapshotsThroughDay": 3,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 0,
+        "homework": 0,
+        "office_hours": 0,
+        "quiz": 0
+      }
     },
     {
       "day": 4,
       "mean": 22.222222222222225,
-      "count": 3
+      "count": 3,
+      "median": 16.666666666666668,
+      "eventsThroughDay": 6,
+      "snapshotsThroughDay": 6,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 3,
+        "homework": 0,
+        "office_hours": 0,
+        "quiz": 0
+      }
     },
     {
       "day": 5,
       "mean": 22.222222222222225,
-      "count": 3
+      "count": 3,
+      "median": 16.666666666666668,
+      "eventsThroughDay": 6,
+      "snapshotsThroughDay": 6,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 3,
+        "homework": 0,
+        "office_hours": 0,
+        "quiz": 0
+      }
     },
     {
       "day": 6,
       "mean": 22.222222222222225,
-      "count": 3
+      "count": 3,
+      "median": 16.666666666666668,
+      "eventsThroughDay": 6,
+      "snapshotsThroughDay": 6,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 3,
+        "homework": 0,
+        "office_hours": 0,
+        "quiz": 0
+      }
     },
     {
       "day": 7,
       "mean": 22.222222222222225,
-      "count": 3
+      "count": 3,
+      "median": 16.666666666666668,
+      "eventsThroughDay": 6,
+      "snapshotsThroughDay": 6,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 3,
+        "homework": 0,
+        "office_hours": 0,
+        "quiz": 0
+      }
     },
     {
       "day": 8,
       "mean": 33.333333333333336,
-      "count": 3
+      "count": 3,
+      "median": 33.333333333333336,
+      "eventsThroughDay": 9,
+      "snapshotsThroughDay": 9,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 0,
+        "quiz": 0
+      }
     },
     {
       "day": 9,
       "mean": 33.333333333333336,
-      "count": 3
+      "count": 3,
+      "median": 33.333333333333336,
+      "eventsThroughDay": 9,
+      "snapshotsThroughDay": 9,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 0,
+        "quiz": 0
+      }
     },
     {
       "day": 10,
       "mean": 33.333333333333336,
-      "count": 3
+      "count": 3,
+      "median": 33.333333333333336,
+      "eventsThroughDay": 9,
+      "snapshotsThroughDay": 9,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 0,
+        "quiz": 0
+      }
     },
     {
       "day": 11,
       "mean": 33.333333333333336,
-      "count": 3
+      "count": 3,
+      "median": 33.333333333333336,
+      "eventsThroughDay": 9,
+      "snapshotsThroughDay": 9,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 0,
+        "quiz": 0
+      }
     },
     {
       "day": 12,
       "mean": 38.88888888888889,
-      "count": 3
+      "count": 3,
+      "median": 33.333333333333336,
+      "eventsThroughDay": 12,
+      "snapshotsThroughDay": 12,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 3,
+        "quiz": 0
+      }
     },
     {
       "day": 13,
       "mean": 38.88888888888889,
-      "count": 3
+      "count": 3,
+      "median": 33.333333333333336,
+      "eventsThroughDay": 12,
+      "snapshotsThroughDay": 12,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 3,
+        "quiz": 0
+      }
     },
     {
       "day": 14,
       "mean": 38.88888888888889,
-      "count": 3
+      "count": 3,
+      "median": 33.333333333333336,
+      "eventsThroughDay": 12,
+      "snapshotsThroughDay": 12,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 3,
+        "quiz": 0
+      }
     },
     {
       "day": 15,
       "mean": 38.88888888888889,
-      "count": 3
+      "count": 3,
+      "median": 33.333333333333336,
+      "eventsThroughDay": 12,
+      "snapshotsThroughDay": 12,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 3,
+        "quiz": 0
+      }
     },
     {
       "day": 16,
       "mean": 38.88888888888889,
-      "count": 3
+      "count": 3,
+      "median": 33.333333333333336,
+      "eventsThroughDay": 12,
+      "snapshotsThroughDay": 12,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 3,
+        "quiz": 0
+      }
     },
     {
       "day": 17,
       "mean": 44.44444444444445,
-      "count": 3
+      "count": 3,
+      "median": 50.0,
+      "eventsThroughDay": 15,
+      "snapshotsThroughDay": 15,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 3,
+        "quiz": 3
+      }
     },
     {
       "day": 18,
       "mean": 44.44444444444445,
-      "count": 3
+      "count": 3,
+      "median": 50.0,
+      "eventsThroughDay": 15,
+      "snapshotsThroughDay": 15,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 3,
+        "quiz": 3
+      }
     },
     {
       "day": 19,
       "mean": 44.44444444444445,
-      "count": 3
+      "count": 3,
+      "median": 50.0,
+      "eventsThroughDay": 15,
+      "snapshotsThroughDay": 15,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 3,
+        "quiz": 3
+      }
     },
     {
       "day": 20,
       "mean": 44.44444444444445,
-      "count": 3
+      "count": 3,
+      "median": 50.0,
+      "eventsThroughDay": 15,
+      "snapshotsThroughDay": 15,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 3,
+        "quiz": 3
+      }
     },
     {
       "day": 21,
       "mean": 44.44444444444445,
-      "count": 3
+      "count": 3,
+      "median": 50.0,
+      "eventsThroughDay": 15,
+      "snapshotsThroughDay": 15,
+      "activityThroughDay": {
+        "lecture": 3,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 3,
+        "quiz": 3
+      }
     },
     {
       "day": 22,
       "mean": 55.555555555555564,
-      "count": 3
+      "count": 3,
+      "median": 50.0,
+      "eventsThroughDay": 18,
+      "snapshotsThroughDay": 18,
+      "activityThroughDay": {
+        "lecture": 6,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 3,
+        "quiz": 3
+      }
     },
     {
       "day": 23,
       "mean": 55.555555555555564,
-      "count": 3
+      "count": 3,
+      "median": 50.0,
+      "eventsThroughDay": 18,
+      "snapshotsThroughDay": 18,
+      "activityThroughDay": {
+        "lecture": 6,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 3,
+        "quiz": 3
+      }
     },
     {
       "day": 24,
       "mean": 55.555555555555564,
-      "count": 3
+      "count": 3,
+      "median": 50.0,
+      "eventsThroughDay": 18,
+      "snapshotsThroughDay": 18,
+      "activityThroughDay": {
+        "lecture": 6,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 3,
+        "quiz": 3
+      }
     },
     {
       "day": 25,
       "mean": 55.555555555555564,
-      "count": 3
+      "count": 3,
+      "median": 50.0,
+      "eventsThroughDay": 18,
+      "snapshotsThroughDay": 18,
+      "activityThroughDay": {
+        "lecture": 6,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 3,
+        "quiz": 3
+      }
     },
     {
       "day": 26,
       "mean": 55.555555555555564,
-      "count": 3
+      "count": 3,
+      "median": 50.0,
+      "eventsThroughDay": 18,
+      "snapshotsThroughDay": 18,
+      "activityThroughDay": {
+        "lecture": 6,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 3,
+        "quiz": 3
+      }
     },
     {
       "day": 27,
       "mean": 55.555555555555564,
-      "count": 3
+      "count": 3,
+      "median": 50.0,
+      "eventsThroughDay": 18,
+      "snapshotsThroughDay": 18,
+      "activityThroughDay": {
+        "lecture": 6,
+        "reading": 3,
+        "homework": 3,
+        "office_hours": 3,
+        "quiz": 3
+      }
     },
     {
       "day": 28,
       "mean": 72.22222222222223,
-      "count": 3
+      "count": 3,
+      "median": 66.66666666666667,
+      "eventsThroughDay": 21,
+      "snapshotsThroughDay": 21,
+      "activityThroughDay": {
+        "lecture": 6,
+        "reading": 3,
+        "homework": 6,
+        "office_hours": 3,
+        "quiz": 3
+      }
     },
     {
       "day": 29,
       "mean": 72.22222222222223,
-      "count": 3
+      "count": 3,
+      "median": 66.66666666666667,
+      "eventsThroughDay": 21,
+      "snapshotsThroughDay": 21,
+      "activityThroughDay": {
+        "lecture": 6,
+        "reading": 3,
+        "homework": 6,
+        "office_hours": 3,
+        "quiz": 3
+      }
     },
     {
       "day": 30,
       "mean": 72.22222222222223,
-      "count": 3
+      "count": 3,
+      "median": 66.66666666666667,
+      "eventsThroughDay": 21,
+      "snapshotsThroughDay": 21,
+      "activityThroughDay": {
+        "lecture": 6,
+        "reading": 3,
+        "homework": 6,
+        "office_hours": 3,
+        "quiz": 3
+      }
     },
     {
       "day": 31,
       "mean": 72.22222222222223,
-      "count": 3
+      "count": 3,
+      "median": 66.66666666666667,
+      "eventsThroughDay": 21,
+      "snapshotsThroughDay": 21,
+      "activityThroughDay": {
+        "lecture": 6,
+        "reading": 3,
+        "homework": 6,
+        "office_hours": 3,
+        "quiz": 3
+      }
     },
     {
       "day": 32,
       "mean": 72.22222222222223,
-      "count": 3
+      "count": 3,
+      "median": 66.66666666666667,
+      "eventsThroughDay": 21,
+      "snapshotsThroughDay": 21,
+      "activityThroughDay": {
+        "lecture": 6,
+        "reading": 3,
+        "homework": 6,
+        "office_hours": 3,
+        "quiz": 3
+      }
     },
     {
       "day": 33,
       "mean": 72.22222222222223,
-      "count": 3
+      "count": 3,
+      "median": 66.66666666666667,
+      "eventsThroughDay": 21,
+      "snapshotsThroughDay": 21,
+      "activityThroughDay": {
+        "lecture": 6,
+        "reading": 3,
+        "homework": 6,
+        "office_hours": 3,
+        "quiz": 3
+      }
     },
     {
       "day": 34,
       "mean": 83.33333333333333,
-      "count": 3
+      "count": 3,
+      "median": 83.33333333333333,
+      "eventsThroughDay": 24,
+      "snapshotsThroughDay": 24,
+      "activityThroughDay": {
+        "lecture": 6,
+        "reading": 3,
+        "homework": 6,
+        "office_hours": 3,
+        "quiz": 6
+      }
     }
   ]
 }

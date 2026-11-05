@@ -4,12 +4,12 @@ import * as echarts from 'echarts/core';
 import {GraphChart} from 'echarts/charts';
 import {TooltipComponent} from 'echarts/components';
 import {CanvasRenderer} from 'echarts/renderers';
-import {readJson,type Trace,type TraceEvent} from './data';
+import {readJson,type Snapshot, type Trace,type TraceEvent} from './data';
 import {ChartSync} from './chartSync';
 import {graphSchema,graphView,nodeTitle,nodeColors,graphNodeState,snapshotAtTime,type KnowledgeGraph as Graph,type GraphNode} from './graphData';
 
 echarts.use([GraphChart,TooltipComponent,CanvasRenderer]);
-export function KnowledgeGraph({trace,event,conceptId,onConcept,sync}:{trace:Trace|null;event:TraceEvent|null;conceptId:string;onConcept:(id:string)=>void;sync:ChartSync}){
+export function KnowledgeGraph({trace,event,conceptId,onConcept,sync,currentSnapshot}:{currentSnapshot:Snapshot|null;trace:Trace|null;event:TraceEvent|null;conceptId:string;onConcept:(id:string)=>void;sync:ChartSync}){
  const [graph,setGraph]=useState<Graph|null>(null),[error,setError]=useState(''),[retry,setRetry]=useState(0);
  const [scope,setScope]=useState<'trace'|'all'>('trace'),[material,setMaterial]=useState(false),[focus,setFocus]=useState(false);
  const [picked,setPicked]=useState<string|null>(null),[hoverDay,setHoverDay]=useState<number|null>(null);
@@ -44,7 +44,7 @@ export function KnowledgeGraph({trace,event,conceptId,onConcept,sync}:{trace:Tra
  useEffect(()=>{setPicked(null);setFocus(false);setHoverDay(null);setScope('trace');},[trace?.id]);
  useEffect(()=>{if(conceptId&&graph){const node=graph.nodes.find(n=>n.labels.includes('Sphere')&&nodeTitle(n)===conceptId);setPicked(node?.id??null);if(!node)setFocus(false);}},[conceptId,graph]);
  const selected=graph?.nodes.find(n=>n.id===picked)??null;
- const eventSnapshot=trace?(event?trace.snapshots.find(s=>s.id===event.snapshotId)!:trace.snapshots[0]):null;
+ const eventSnapshot=currentSnapshot ?? (trace?(event?trace.snapshots.find(s=>s.id===event.snapshotId)!:trace.snapshots[0]):null);
  const snapshot=trace&&hoverDay!==null?snapshotAtTime(trace,hoverDay):eventSnapshot;
  const view=useMemo(()=>graph?graphView(graph,trace,scope,material,focus?picked:null,types):{nodes:[],edges:[]},[graph,trace,scope,material,focus,picked,types]);
  const snapshotRef=useRef(snapshot);snapshotRef.current=snapshot;

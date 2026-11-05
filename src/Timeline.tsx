@@ -1,20 +1,23 @@
 import { useEffect, useRef, useState } from 'react';
 import * as echarts from 'echarts/core';
-import { LineChart, ScatterChart } from 'echarts/charts';
+import { LineChart, ScatterChart, EffectScatterChart } from 'echarts/charts';
 import { GridComponent, TooltipComponent, DataZoomComponent, MarkLineComponent, MarkPointComponent, AriaComponent, AxisPointerComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { ChartSync, linkCrosshair } from './chartSync';
-import type { Trace, TraceEvent } from './data';
+import type { Snapshot, Trace, TraceEvent } from './data';
 import { eventStyles, eventTypes, timelineScale, formatSimulatorTime, mastery, wheelWindow, constrainWindow, type WindowRange } from './domain';
 
-echarts.use([LineChart, ScatterChart, GridComponent, TooltipComponent, DataZoomComponent, MarkLineComponent, MarkPointComponent, AriaComponent, AxisPointerComponent, CanvasRenderer]);
+echarts.use([LineChart, ScatterChart, EffectScatterChart, GridComponent, TooltipComponent, DataZoomComponent, MarkLineComponent, MarkPointComponent, AriaComponent, AxisPointerComponent, CanvasRenderer]);
 
-type Props = { trace: Trace; selected: TraceEvent | null; onSelect: (id: string) => void; reset: number; sync: ChartSync; onRange: (range: WindowRange) => void };
-export function Timeline({ trace, selected, onSelect, reset, sync, onRange }: Props) {
+type Props = { currentDay: number; currentSnapshot: Snapshot; trace: Trace; selected: TraceEvent | null; onSelect: (id: string) => void; reset: number; sync: ChartSync; onRange: (range: WindowRange) => void };
+export function Timeline({ trace, selected, currentDay, currentSnapshot, onSelect, reset, sync, onRange }: Props) {
   const element = useRef<HTMLDivElement>(null);
   const chart = useRef<echarts.ECharts | null>(null);
-  const extent: WindowRange = [trace.snapshots[0].day, Math.max(trace.snapshots[0].day + 1, trace.snapshots.at(-1)!.day)];
+  const extent: WindowRange = [trace.snapshots[0].day, Math.max(trace.snapshots[0].day + 1, currentDay)];
   const view = useRef<WindowRange>(extent);
+  const lastDay = useRef<number | undefined>(undefined);
+  const extentRef = useRef(extent);
+  extentRef.current = extent;
   const [preset,setPreset] = useState('full');
   const presetRef=useRef('full');
   const [rangeRevision,setRangeRevision] = useState(0);
@@ -53,7 +56,7 @@ export function Timeline({ trace, selected, onSelect, reset, sync, onRange }: Pr
       const scale = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? node.clientHeight : 1;
       const fixed = ['3','7','30'].includes(presetRef.current);
       const pan = fixed || event.shiftKey || (!event.ctrlKey && Math.abs(event.deltaX) > Math.abs(event.deltaY));
-      const next = wheelWindow(view.current, extent, event.deltaX * scale, event.deltaY * scale, anchor, pan);
+      const next = wheelWindow(view.current, extentRef.current, event.deltaX * scale, event.deltaY * scale, anchor, pan);
       if(!pan){presetRef.current='custom';setPreset('custom');}
       view.current = next;
       instance.dispatchAction({ type: 'dataZoom', dataZoomIndex: 0, startValue: next[0], endValue: next[1] });
@@ -62,12 +65,20 @@ export function Timeline({ trace, selected, onSelect, reset, sync, onRange }: Pr
     const observer = new ResizeObserver(() => instance.resize());
     observer.observe(node);
     return () => { unlink(); observer.disconnect(); node.removeEventListener('wheel', wheel, true); instance.dispose(); chart.current = null; };
-  }, [trace]);
+  }, [trace.id, sync]);
 
   useEffect(() => {
     const snapshots = new Map(trace.snapshots.map(s => [s.id, s]));
-    const state = selected ? snapshots.get(selected.snapshotId) : null;
-    const selectedDay = state?.day;
+    if (lastDay.current !== currentDay) {
+      const span = view.current[1] - view.current[0];
+      view.current = presetRef.current === 'full'
+        ? extent
+        : constrainWindow(currentDay - span, currentDay, extent);
+      setVisible(view.current);
+    }
+    lastDay.current = currentDay;
+    const currentMastery = mastery(currentSnapshot);
+    const pulse = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const line = trace.snapshots.map(s => [s.day, mastery(s)]);
     const fixed = ['3','7','30'].includes(preset);
     const width = fixed ? Math.min(presetDays[preset],extent[1]-extent[0]) : undefined;
@@ -100,8 +111,12 @@ export function Timeline({ trace, selected, onSelect, reset, sync, onRange }: Pr
       ],
       series: [
         { name: 'Overall mastery', type: 'line', data: line, step: 'end', showSymbol: false, lineStyle: { color: '#2d64bd', width: 2.5 }, itemStyle: { color: '#2d64bd' }, connectNulls: false,
-          markLine: selectedDay === undefined ? { data: [] } : { silent: true, symbol: 'none', label: { show: false }, lineStyle: { color: '#8aaddc', type: 'dashed', width: 1 }, data: [{ xAxis: selectedDay }] },
-          markPoint: state && mastery(state) !== null ? { silent: true, symbol: 'circle', symbolSize: 8, label: { show: false }, itemStyle: { color: '#2d64bd' }, data: [{ coord: [state.day, mastery(state)] }] } : { data: [] },
+          markLine: { silent: true, symbol: 'none', label: { show: false }, lineStyle: { color: '#8aaddc', type: 'dashed', width: 1 }, data: [{ xAxis: currentDay }] },
+        },
+        { name: 'Current day', type: pulse ? 'effectScatter' : 'scatter', silent: true, z: 8, symbolSize: 10,
+          itemStyle: { color: '#188038', borderColor: '#fff', borderWidth: 1.5 },
+          rippleEffect: { period: 2.4, scale: 2.6, number: 1, brushType: 'stroke' },
+          data: currentMastery === null ? [] : [[currentDay, currentMastery]],
         },
         ...eventTypes.map(type => ({ name: eventStyles[type].title, type: 'scatter', symbol: eventStyles[type].symbol, z: 5,
           data: trace.events.filter(e => e.type === type).map(e => ({ value: [snapshots.get(e.snapshotId)!.day, eventStyles[type].plotLevel], eventId: e.id,
@@ -110,12 +125,12 @@ export function Timeline({ trace, selected, onSelect, reset, sync, onRange }: Pr
       ],
     };
     chart.current?.setOption(options, { notMerge: true });
-  }, [trace, selected,preset,rangeRevision]);
+  }, [trace, selected, currentDay, currentSnapshot, preset, rangeRevision]);
 
   useEffect(() => {
     view.current = extent;
     setVisible(extent);presetRef.current='full';setPreset('full');setRangeRevision(n=>n+1);
   }, [reset]);
 
-  return <><div className="timeline-chart" ref={element} role="img" aria-label={`Trace ${trace.id} mastery and overlaid learning events. X-axis: Simulator day. Scroll or pinch to zoom; Shift-scroll or horizontal scroll to pan.`} data-testid="timeline-chart"/><output className="visible-range" data-testid="visible-range" aria-live="off">{timelineScale(visible[1]-visible[0]).unit === 'day' ? `Showing days ${Number(visible[0].toFixed(1))}–${Number(visible[1].toFixed(1))}` : `Showing ${formatSimulatorTime(visible[0])} – ${formatSimulatorTime(visible[1])}`}{timelineScale(visible[1]-visible[0]).unit === 'day' ? '' : timelineScale(visible[1]-visible[0]).unit === 'hour' ? ' · Hourly ticks' : ' · Half-hour ticks'}</output><div className="range-presets" role="group" aria-label="Timeline range presets">{[['3','3 days'],['7','Week'],['30','Month'],['full','Full term']].map(([key,label])=><button key={key} type="button" aria-pressed={preset===key} onClick={()=>{const day=selected?trace.snapshots.find(s=>s.id===selected.snapshotId)!.day:(view.current[0]+view.current[1])/2;const span=presetDays[key];const next:WindowRange=key==='full'?extent:constrainWindow(day-span/2,day+span/2,extent);presetRef.current=key;setPreset(key);view.current=next;setVisible(next);setRangeRevision(n=>n+1);}}>{label}</button>)}{preset==='custom'&&<span>Custom view</span>}</div>{['3','7','30'].includes(preset)&&<p className="preset-hint">Scroll to move the {preset==='3'?'3-day':preset==='7'?'7-day':'30-day'} window. Its duration stays fixed.</p>}</>;
+  return <><div className="timeline-chart" ref={element} role="img" aria-label={`Trace ${trace.id} mastery and overlaid learning events. X-axis: Simulator day. Scroll or pinch to zoom; Shift-scroll or horizontal scroll to pan.`} data-testid="timeline-chart" data-current-day={currentDay} data-recorded-events={trace.events.length}/><output className="visible-range" data-testid="visible-range" aria-live="off">{timelineScale(visible[1]-visible[0]).unit === 'day' ? `Showing days ${Number(visible[0].toFixed(1))}–${Number(visible[1].toFixed(1))}` : `Showing ${formatSimulatorTime(visible[0])} – ${formatSimulatorTime(visible[1])}`}{timelineScale(visible[1]-visible[0]).unit === 'day' ? '' : timelineScale(visible[1]-visible[0]).unit === 'hour' ? ' · Hourly ticks' : ' · Half-hour ticks'}</output><div className="range-presets" role="group" aria-label="Timeline range presets">{[['3','3 days'],['7','Week'],['30','Month'],['full','Full term']].map(([key,label])=><button key={key} type="button" aria-pressed={preset===key} onClick={()=>{const day=currentDay;const span=presetDays[key];const next:WindowRange=key==='full'?extent:constrainWindow(day-span/2,day+span/2,extent);presetRef.current=key;setPreset(key);view.current=next;setVisible(next);setRangeRevision(n=>n+1);}}>{label}</button>)}{preset==='custom'&&<span>Custom view</span>}</div>{['3','7','30'].includes(preset)&&<p className="preset-hint">Scroll to move the {preset==='3'?'3-day':preset==='7'?'7-day':'30-day'} window. Its duration stays fixed.</p>}</>;
 }
