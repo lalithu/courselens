@@ -1,0 +1,107 @@
+:root {
+  --text: #262137;
+  --text-secondary: #635c72;
+  --accent: #59438f;
+  --border: #ded8e8;
+  --canvas: #f8f6f2;
+  --course-tint: #eee8f8;
+}
+.app-header { padding-bottom: 20px; flex-wrap: wrap; gap: 14px; }
+.course-brand { display: flex; align-items: center; gap: 12px; }
+.course-brand h1 { font-size: 25px; }
+.course-brand .subtitle { margin: 1px 0 0; }
+.course-mark { display: grid; place-items: center; width: 40px; height: 40px; background: var(--accent); color: white; border-radius: 11px; font-size: 25px; }
+.course-nav, .course-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.course-nav { padding: 3px; border: 1px solid var(--border); background: white; border-radius: 9px; }
+.course-nav .button { border-color: transparent; min-height: 32px; }
+.course-nav .button[aria-pressed=true] { background: var(--course-tint); color: var(--accent); font-weight: 650; }
+.course-pill { display: inline-flex; align-items: center; border-radius: 20px; background: #e5f2e9; color: #235b46; padding: 5px 10px; font-size: 11px; white-space: nowrap; }
+.course-between { justify-content: space-between; }
+.course-panel { padding: 20px; }
+.course-panel p { line-height: 1.55; }
+.course-panel .eyebrow { margin: 0 0 4px; }
+.course-tools { margin-bottom: 16px; padding-block: 12px; }
+.course-student { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.course-editor { background: #faf8fd; border: 1px solid var(--border); border-radius: 8px; margin-top: 14px; padding: 14px; }
+.course-editor h3 { margin: 0; }
+.course-editor .field { margin: 10px 0; }
+.course-editor label:has(select) { max-width: 320px; }
+.course-editor textarea { font: inherit; width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--border); }
+.course-editor input[type=file] { max-width: 100%; }
+.course-summary { font-size: 20px; font-weight: 650; }
+.course-list { list-style: none; padding: 0; }
+.course-list li { border-top: 1px solid var(--border); padding: 9px 0; overflow-wrap: anywhere; }
+.course-list li span { display: block; color: var(--text-secondary); font-size: 12px; }
+.course-list li p { margin: 6px 0; white-space: pre-wrap; }
+.course-panel details { margin-top: 12px; }
+.course-panel summary { cursor: pointer; }
+.canvas-preview { max-width: 760px; }
+.course-panel .primary { background: var(--accent); border-color: var(--accent); }
+@media (max-width: 680px) {
+  .course-student { grid-template-columns: 1fr; }
+  .app-header .header-actions { flex-wrap: wrap; }
+  .course-panel { padding: 14px; }
+}
+.teacher-home { max-width: 970px; display: grid; gap: 16px; margin: 0 auto; }
+.teacher-home .course-panel { padding: clamp(16px, 3vw, 30px); }
+.teacher-assistant { border-top: 3px solid var(--accent); }
+.teacher-assistant h2 { font-size: clamp(22px, 3vw, 30px); }
+.teacher-subtitle { color: var(--text-secondary); margin: 6px 0 16px; }
+.teacher-prompt { display: flex; gap: 8px; }
+.teacher-prompt input, .report-editor input { color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font: inherit; min-width: 0; }
+.teacher-prompt input { flex: 1; }
+.teacher-suggestions { margin-top: 8px; }
+.teacher-suggestions .button { min-height: 32px; white-space: normal; }
+.teacher-replies { margin-top: 16px; }
+.teacher-replies article { background: #f7f3fc; border-radius: 8px; padding: 12px; }
+.teacher-replies p { margin: 0 0 8px; }
+.teacher-question { font-weight: 650; }
+.teacher-back { margin-bottom: 12px; }
+.brief-stats { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin: 18px 0; }
+.brief-stats div { background: #f7f4fb; border-radius: 8px; padding: 12px; }
+.brief-stats strong, .brief-stats span { display: block; }
+.brief-stats strong { font-size: clamp(15px, 2.2vw, 24px); color: var(--accent); }
+.brief-stats span { font-size: 12px; color: var(--text-secondary); }
+.brief-focus { margin-bottom: 16px; }
+.report-recipient { align-items: end; }
+.report-recipient .field { flex: 1; min-width: min(200px,100%); max-width: 360px; margin-bottom: 0; }
+.report-editor a.button { text-decoration: none; }
+@media (max-width: 520px) {
+  .teacher-suggestions { align-items: stretch; }
+  .teacher-suggestions .button { min-height: 38px; }
+  .brief-stats { gap: 5px; }
+  .brief-stats div { padding: 7px; }
+}
+/* A playful classroom palette: blue for navigation, green for progress,
+   amber for review, and red for communications. */
+:root {
+  --text: #203044;
+  --text-secondary: #536176;
+  --accent: #1967d2;
+  --border: #dce4ef;
+  --canvas: #f6f8fc;
+  --course-tint: #e8f0fe;
+  --cl-blue: #4285f4;
+  --cl-red: #ea4335;
+  --cl-yellow: #fbbc05;
+  --cl-green: #34a853;
+  --cl-blue-soft: #e8f0fe;
+  --cl-red-soft: #fce8e6;
+  --cl-yellow-soft: #fef7e0;
+  --cl-green-soft: #e6f4ea;
+}
+.course-mark { background: conic-gradient(var(--cl-blue) 0deg 90deg,var(--cl-green) 90deg 180deg,var(--cl-yellow) 180deg 270deg,var(--cl-red) 270deg 360deg); color:#18243a; font-weight: 800; }
+.course-nav .button[aria-pressed=true] { background:var(--cl-blue-soft); }
+.teacher-assistant { border-top-color: transparent; background: linear-gradient(#fff,#fff) padding-box,linear-gradient(90deg,var(--cl-blue) 25%,var(--cl-red) 25% 50%,var(--cl-yellow) 50% 75%,var(--cl-green) 75%) border-box; }
+.teacher-replies article { background: var(--cl-blue-soft); }
+.brief-stats div:nth-child(1) { background: var(--cl-blue-soft); }
+.brief-stats div:nth-child(2) { background: var(--cl-green-soft); }
+.brief-stats div:nth-child(3) { background: var(--cl-yellow-soft); }
+.brief-stats div:nth-child(2) strong { color:#14673c; }
+.brief-stats div:nth-child(3) strong { color:#795500; }
+.brief-focus { background:var(--cl-yellow-soft); padding:9px 12px; border-radius:8px; }
+.teacher-brief button:has(+button):not(.primary) { border-color:var(--border); }
+.report-editor { background: var(--cl-red-soft); }
+.course-editor:not(.report-editor) { background: var(--cl-blue-soft); }
+.course-panel .primary { background:#1967d2; border-color:#1967d2; }
+.course-panel .primary:not(:disabled):hover { background:#185abc; border-color:#185abc; }

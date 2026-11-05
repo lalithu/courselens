@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "datasetId": "courselens-demo",
+  "title": "CS1 \u00b7 CourseLens synthetic demo",
+  "origin": "simulator",
+  "calendarStart": null,
+  "traces": [
+    {
+      "id": "206",
+      "profileId": "demo",
+      "exampleNumber": 206,
+      "label": "Trace 206 \u00b7 Synthetic demo",
+      "path": "traces/206.json"
+    },
+    {
+      "id": "1",
+      "profileId": "demo",
+      "exampleNumber": 1,
+      "label": "Trace 1 \u00b7 Synthetic demo",
+      "path": "traces/1.json"
+    },
+    {
+      "id": "2",
+      "profileId": "demo",
+      "exampleNumber": 2,
+      "label": "Trace 2 \u00b7 Synthetic demo",
+      "path": "traces/2.json"
+    }
+  ]
+}

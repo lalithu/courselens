@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "concepts": {
+    "Variables": "Store a value under a name.",
+    "Conditionals": "Choose an action based on a condition.",
+    "Loops": "Repeat an action while a condition holds.",
+    "Functions": "Group instructions into reusable procedures.",
+    "Lists": "Represent an ordered collection of values.",
+    "Debugging": "Find and correct unexpected program behavior."
+  },
+  "misconceptions": {
+    "boundary": {
+      "description": "The loop runs one more or one fewer time than intended.",
+      "conceptIds": [
+        "Loops"
+      ]
+    }
+  },
+  "answers": [
+    {
+      "question": "How many times does a loop run if it takes values 0, 1, and 2?",
+      "answer": "Three times.",
+      "correctness": "correct"
+    },
+    {
+      "question": "What is one reason to write a function?",
+      "answer": "To reuse a named procedure.",
+      "correctness": "correct"
+    },
+    {
+      "question": "Which action helps isolate a bug?",
+      "answer": "Change several things at once.",
+      "correctness": "incorrect"
+    },
+    {
+      "question": "What can a debugger help you inspect?",
+      "answer": "The current values of variables.",
+      "correctness": "correct"
+    }
+  ],
+  "sources": []
+}

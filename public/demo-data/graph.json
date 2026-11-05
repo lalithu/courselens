@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "path": "CourseLens synthetic demo graph",
+    "sha256": "8a275c6dced7685060050c3ca5cb542d0d5a57bca8075954de659219eba2cfdb"
+  },
+  "nodes": [
+    {
+      "id": "Variables",
+      "labels": [
+        "Sphere"
+      ],
+      "properties": {
+        "title": "Variables",
+        "description": "Store a value under a name."
+      }
+    },
+    {
+      "id": "Conditionals",
+      "labels": [
+        "Sphere"
+      ],
+      "properties": {
+        "title": "Conditionals",
+        "description": "Choose an action based on a condition."
+      }
+    },
+    {
+      "id": "Loops",
+      "labels": [
+        "Sphere"
+      ],
+      "properties": {
+        "title": "Loops",
+        "description": "Repeat an action while a condition holds."
+      }
+    },
+    {
+      "id": "Functions",
+      "labels": [
+        "Sphere"
+      ],
+      "properties": {
+        "title": "Functions",
+        "description": "Group instructions into reusable procedures."
+      }
+    },
+    {
+      "id": "Lists",
+      "labels": [
+        "Sphere"
+      ],
+      "properties": {
+        "title": "Lists",
+        "description": "Represent an ordered collection of values."
+      }
+    },
+    {
+      "id": "Debugging",
+      "labels": [
+        "Sphere"
+      ],
+      "properties": {
+        "title": "Debugging",
+        "description": "Find and correct unexpected program behavior."
+      }
+    },
+    {
+      "id": "boundary",
+      "labels": [
+        "Misconception"
+      ],
+      "properties": {
+        "title": "Off-by-one loop boundary",
+        "description": "The loop runs one more or one fewer time than intended."
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "0",
+      "source": "Variables",
+      "target": "Conditionals",
+      "type": "Required_for",
+      "properties": {}
+    },
+    {
+      "id": "1",
+      "source": "Conditionals",
+      "target": "Loops",
+      "type": "Required_for",
+      "properties": {}
+    },
+    {
+      "id": "2",
+      "source": "Loops",
+      "target": "Functions",
+      "type": "Required_for",
+      "properties": {}
+    },
+    {
+      "id": "3",
+      "source": "Variables",
+      "target": "Lists",
+      "type": "Required_for",
+      "properties": {}
+    },
+    {
+      "id": "4",
+      "source": "Loops",
+      "target": "Debugging",
+      "type": "Required_for",
+      "properties": {}
+    },
+    {
+      "id": "5",
+      "source": "boundary",
+      "target": "Loops",
+      "type": "Derived_from",
+      "properties": {}
+    }
+  ]
+}

@@ -1,0 +1,488 @@
+{
+  "schemaVersion": 1,
+  "id": "1",
+  "profileId": "demo",
+  "exampleNumber": 1,
+  "sources": [
+    {
+      "path": "CourseLens synthetic demo trace 1",
+      "sha256": "7401bcc282da5ad6a4b0a3715bf73ea2bd5a3289e3654389f2a7aa504bc72957"
+    }
+  ],
+  "concepts": [
+    {
+      "id": "Variables",
+      "title": "Variables",
+      "description": "Store a value under a name."
+    },
+    {
+      "id": "Conditionals",
+      "title": "Conditionals",
+      "description": "Choose an action based on a condition."
+    },
+    {
+      "id": "Loops",
+      "title": "Loops",
+      "description": "Repeat an action while a condition holds."
+    },
+    {
+      "id": "Functions",
+      "title": "Functions",
+      "description": "Group instructions into reusable procedures."
+    },
+    {
+      "id": "Lists",
+      "title": "Lists",
+      "description": "Represent an ordered collection of values."
+    },
+    {
+      "id": "Debugging",
+      "title": "Debugging",
+      "description": "Find and correct unexpected program behavior."
+    }
+  ],
+  "misconceptions": [
+    {
+      "id": "boundary",
+      "title": "Off-by-one loop boundary",
+      "description": "The loop runs one more or one fewer time than intended.",
+      "conceptIds": [
+        "Loops"
+      ]
+    }
+  ],
+  "snapshots": [
+    {
+      "id": "1:s0",
+      "sequence": 0,
+      "day": 0,
+      "concepts": [
+        {
+          "conceptId": "Variables",
+          "mastered": false,
+          "confidence": 0.73,
+          "exposed": true
+        },
+        {
+          "conceptId": "Conditionals",
+          "mastered": false,
+          "confidence": 0.63,
+          "exposed": true
+        },
+        {
+          "conceptId": "Loops",
+          "mastered": false,
+          "confidence": 0.28,
+          "exposed": false
+        },
+        {
+          "conceptId": "Functions",
+          "mastered": false,
+          "confidence": 0.13,
+          "exposed": false
+        },
+        {
+          "conceptId": "Lists",
+          "mastered": false,
+          "confidence": 0.05,
+          "exposed": false
+        },
+        {
+          "conceptId": "Debugging",
+          "mastered": false,
+          "confidence": 0.05,
+          "exposed": false
+        }
+      ],
+      "activeMisconceptionIds": []
+    },
+    {
+      "id": "1:s1",
+      "sequence": 1,
+      "day": 4,
+      "concepts": [
+        {
+          "conceptId": "Variables",
+          "mastered": true,
+          "confidence": 0.83,
+          "exposed": true
+        },
+        {
+          "conceptId": "Conditionals",
+          "mastered": false,
+          "confidence": 0.73,
+          "exposed": true
+        },
+        {
+          "conceptId": "Loops",
+          "mastered": false,
+          "confidence": 0.38,
+          "exposed": false
+        },
+        {
+          "conceptId": "Functions",
+          "mastered": false,
+          "confidence": 0.23,
+          "exposed": false
+        },
+        {
+          "conceptId": "Lists",
+          "mastered": false,
+          "confidence": 0.08,
+          "exposed": false
+        },
+        {
+          "conceptId": "Debugging",
+          "mastered": false,
+          "confidence": 0.05,
+          "exposed": false
+        }
+      ],
+      "activeMisconceptionIds": []
+    },
+    {
+      "id": "1:s2",
+      "sequence": 2,
+      "day": 8,
+      "concepts": [
+        {
+          "conceptId": "Variables",
+          "mastered": true,
+          "confidence": 0.93,
+          "exposed": true
+        },
+        {
+          "conceptId": "Conditionals",
+          "mastered": true,
+          "confidence": 0.83,
+          "exposed": true
+        },
+        {
+          "conceptId": "Loops",
+          "mastered": false,
+          "confidence": 0.48,
+          "exposed": false
+        },
+        {
+          "conceptId": "Functions",
+          "mastered": false,
+          "confidence": 0.33,
+          "exposed": false
+        },
+        {
+          "conceptId": "Lists",
+          "mastered": false,
+          "confidence": 0.18,
+          "exposed": false
+        },
+        {
+          "conceptId": "Debugging",
+          "mastered": false,
+          "confidence": 0.05,
+          "exposed": false
+        }
+      ],
+      "activeMisconceptionIds": [
+        "boundary"
+      ]
+    },
+    {
+      "id": "1:s3",
+      "sequence": 3,
+      "day": 12,
+      "concepts": [
+        {
+          "conceptId": "Variables",
+          "mastered": true,
+          "confidence": 0.98,
+          "exposed": true
+        },
+        {
+          "conceptId": "Conditionals",
+          "mastered": true,
+          "confidence": 0.93,
+          "exposed": true
+        },
+        {
+          "conceptId": "Loops",
+          "mastered": false,
+          "confidence": 0.58,
+          "exposed": true
+        },
+        {
+          "conceptId": "Functions",
+          "mastered": false,
+          "confidence": 0.43,
+          "exposed": false
+        },
+        {
+          "conceptId": "Lists",
+          "mastered": false,
+          "confidence": 0.28,
+          "exposed": false
+        },
+        {
+          "conceptId": "Debugging",
+          "mastered": false,
+          "confidence": 0.1,
+          "exposed": false
+        }
+      ],
+      "activeMisconceptionIds": [
+        "boundary"
+      ]
+    },
+    {
+      "id": "1:s4",
+      "sequence": 4,
+      "day": 17,
+      "concepts": [
+        {
+          "conceptId": "Variables",
+          "mastered": true,
+          "confidence": 0.98,
+          "exposed": true
+        },
+        {
+          "conceptId": "Conditionals",
+          "mastered": true,
+          "confidence": 0.98,
+          "exposed": true
+        },
+        {
+          "conceptId": "Loops",
+          "mastered": false,
+          "confidence": 0.7,
+          "exposed": true
+        },
+        {
+          "conceptId": "Functions",
+          "mastered": false,
+          "confidence": 0.55,
+          "exposed": true
+        },
+        {
+          "conceptId": "Lists",
+          "mastered": false,
+          "confidence": 0.4,
+          "exposed": false
+        },
+        {
+          "conceptId": "Debugging",
+          "mastered": false,
+          "confidence": 0.23,
+          "exposed": false
+        }
+      ],
+      "activeMisconceptionIds": [
+        "boundary"
+      ]
+    },
+    {
+      "id": "1:s5",
+      "sequence": 5,
+      "day": 22,
+      "concepts": [
+        {
+          "conceptId": "Variables",
+          "mastered": true,
+          "confidence": 0.98,
+          "exposed": true
+        },
+        {
+          "conceptId": "Conditionals",
+          "mastered": true,
+          "confidence": 0.98,
+          "exposed": true
+        },
+        {
+          "conceptId": "Loops",
+          "mastered": true,
+          "confidence": 0.83,
+          "exposed": true
+        },
+        {
+          "conceptId": "Functions",
+          "mastered": false,
+          "confidence": 0.68,
+          "exposed": true
+        },
+        {
+          "conceptId": "Lists",
+          "mastered": false,
+          "confidence": 0.53,
+          "exposed": true
+        },
+        {
+          "conceptId": "Debugging",
+          "mastered": false,
+          "confidence": 0.35,
+          "exposed": false
+        }
+      ],
+      "activeMisconceptionIds": []
+    },
+    {
+      "id": "1:s6",
+      "sequence": 6,
+      "day": 28,
+      "concepts": [
+        {
+          "conceptId": "Variables",
+          "mastered": true,
+          "confidence": 0.98,
+          "exposed": true
+        },
+        {
+          "conceptId": "Conditionals",
+          "mastered": true,
+          "confidence": 0.98,
+          "exposed": true
+        },
+        {
+          "conceptId": "Loops",
+          "mastered": true,
+          "confidence": 0.98,
+          "exposed": true
+        },
+        {
+          "conceptId": "Functions",
+          "mastered": true,
+          "confidence": 0.83,
+          "exposed": true
+        },
+        {
+          "conceptId": "Lists",
+          "mastered": false,
+          "confidence": 0.68,
+          "exposed": true
+        },
+        {
+          "conceptId": "Debugging",
+          "mastered": false,
+          "confidence": 0.5,
+          "exposed": false
+        }
+      ],
+      "activeMisconceptionIds": []
+    },
+    {
+      "id": "1:s7",
+      "sequence": 7,
+      "day": 34,
+      "concepts": [
+        {
+          "conceptId": "Variables",
+          "mastered": true,
+          "confidence": 0.98,
+          "exposed": true
+        },
+        {
+          "conceptId": "Conditionals",
+          "mastered": true,
+          "confidence": 0.98,
+          "exposed": true
+        },
+        {
+          "conceptId": "Loops",
+          "mastered": true,
+          "confidence": 0.98,
+          "exposed": true
+        },
+        {
+          "conceptId": "Functions",
+          "mastered": true,
+          "confidence": 0.98,
+          "exposed": true
+        },
+        {
+          "conceptId": "Lists",
+          "mastered": true,
+          "confidence": 0.83,
+          "exposed": true
+        },
+        {
+          "conceptId": "Debugging",
+          "mastered": false,
+          "confidence": 0.65,
+          "exposed": true
+        }
+      ],
+      "activeMisconceptionIds": []
+    }
+  ],
+  "events": [
+    {
+      "id": "1:e0",
+      "snapshotId": "1:s0",
+      "reportStep": 1,
+      "type": "lecture",
+      "inputText": "Variables and conditionals",
+      "responseText": "",
+      "assessments": []
+    },
+    {
+      "id": "1:e1",
+      "snapshotId": "1:s1",
+      "reportStep": 2,
+      "type": "reading",
+      "inputText": "Loop tracing and termination",
+      "responseText": "",
+      "assessments": []
+    },
+    {
+      "id": "1:e2",
+      "snapshotId": "1:s2",
+      "reportStep": 3,
+      "type": "homework",
+      "inputText": "Q1. How many times does a loop run if it takes values 0, 1, and 2?",
+      "responseText": "A1. Three times.\nKnowledge Components:\nLoops",
+      "assessments": []
+    },
+    {
+      "id": "1:e3",
+      "snapshotId": "1:s3",
+      "reportStep": 4,
+      "type": "office_hours",
+      "inputText": "Trace a loop with an exclusive upper bound.",
+      "responseText": "The student used a table to explain the stopping point.",
+      "assessments": []
+    },
+    {
+      "id": "1:e4",
+      "snapshotId": "1:s4",
+      "reportStep": 5,
+      "type": "quiz",
+      "inputText": "Q1. What is one reason to write a function?",
+      "responseText": "A1. To reuse a named procedure.\nKnowledge Components:\nFunctions",
+      "assessments": []
+    },
+    {
+      "id": "1:e5",
+      "snapshotId": "1:s5",
+      "reportStep": 6,
+      "type": "lecture",
+      "inputText": "Working with lists",
+      "responseText": "",
+      "assessments": []
+    },
+    {
+      "id": "1:e6",
+      "snapshotId": "1:s6",
+      "reportStep": 7,
+      "type": "homework",
+      "inputText": "Q1. Which action helps isolate a bug?",
+      "responseText": "A1. Change several things at once.\nKnowledge Components:\nDebugging",
+      "assessments": []
+    },
+    {
+      "id": "1:e7",
+      "snapshotId": "1:s7",
+      "reportStep": 8,
+      "type": "quiz",
+      "inputText": "Q1. What can a debugger help you inspect?",
+      "responseText": "A1. The current values of variables.\nKnowledge Components:\nDebugging",
+      "assessments": []
+    }
+  ]
+}
