@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="242" viewBox="0 0 960 242" role="img" aria-labelledby="title desc">
+<title id="title">How a trace becomes a day-specific view</title>
+<desc id="desc">Simulator data is validated, filtered to the chosen day, then used by the teacher and student views.</desc>
+<rect x="1" y="1" width="958" height="240" rx="18" fill="#f7f9fc" stroke="#d4dfeb"/>
+<g font-family="system-ui, sans-serif">
+<text x="25" y="45" font-size="24" font-weight="700" fill="#172a43">From simulator trace to classroom evidence</text>
+<rect x="25" y="76" width="210" height="138" rx="12" fill="#e9f0ff"/>
+<text x="41" y="111" font-size="15" font-weight="700" fill="#154fa3">01</text>
+<text x="41" y="148" font-size="20" font-weight="700" fill="#172a43">Simulator trace</text>
+<text x="41" y="179" font-size="15" fill="#3f5269">Snapshots and events</text>
+<path d="M239 145h14m-5 -5l5 5-5 5" fill="none" stroke="#506783" stroke-width="2"/>
+<rect x="258" y="76" width="210" height="138" rx="12" fill="#e6f5ed"/>
+<text x="274" y="111" font-size="15" font-weight="700" fill="#11603c">02</text>
+<text x="274" y="148" font-size="20" font-weight="700" fill="#172a43">Validate the trace</text>
+<text x="274" y="179" font-size="15" fill="#3f5269">Schema and identity</text>
+<path d="M472 145h14m-5 -5l5 5-5 5" fill="none" stroke="#506783" stroke-width="2"/>
+<rect x="491" y="76" width="210" height="138" rx="12" fill="#fff3da"/>
+<text x="507" y="111" font-size="15" font-weight="700" fill="#875208">03</text>
+<text x="507" y="148" font-size="20" font-weight="700" fill="#172a43">Pick a course day</text>
+<text x="507" y="179" font-size="15" fill="#3f5269">Keep observations ≤ day</text>
+<path d="M705 145h14m-5 -5l5 5-5 5" fill="none" stroke="#506783" stroke-width="2"/>
+<rect x="724" y="76" width="210" height="138" rx="12" fill="#faedf1"/>
+<text x="740" y="111" font-size="15" font-weight="700" fill="#96284b">04</text>
+<text x="740" y="148" font-size="20" font-weight="700" fill="#172a43">Read the evidence</text>
+<text x="740" y="179" font-size="15" fill="#3f5269">Teacher and Student</text>
+</g></svg>

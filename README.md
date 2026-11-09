@@ -1,46 +1,45 @@
 # CourseLens
 
-CourseLens is a teacher-first prototype for exploring learning progress in an introductory programming course. It grew out of the CS1 student trace visualizer and uses the same snapshot, event, concept, misconception, and assessment data model.
+CourseLens turns simulated CS1 learning traces into a teacher workspace. Ask about a student’s progress, then open the timeline and inspect the event behind the answer.
 
-## Run locally
+![Fullscreen CourseLens trace viewer for synthetic trace 206, showing the timeline and the day 17 quiz question, correct response, and linked concept](docs/media/trace-fullscreen-day-24.png)
 
-Install Node.js 22.12 or newer and pnpm 11.25, then run these commands from the repository root.
+*Trace 206 at day 24 of 34, about 71% through the course. The event panel shows the day 17 quiz and its recorded answer.*
+
+## Try it
+
+Requires Node.js 22.12+ and pnpm 11.25.
 
 ```sh
 pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open the URL printed in the terminal. The public checkout runs with three original synthetic demo traces. Trace 206 is selected on launch. The numbers are demo identifiers.
+Open the URL Vite prints. The demo includes three synthetic traces and starts on trace 206 at day 34.
 
-## What works today
+1. In **Teacher**, click **What misconceptions are active?**, then **Open trace 206 details**.
+2. Move **Course progress** to day 8. Inspect the homework event in **Progress & evidence**.
+3. Switch to **Student**. The day stays at 8.
 
-- **Teacher workspace.** Ask for a progress update, assessment summary, or active misconceptions. Use a trace number to ask about another student. Answers are computed from the recorded data by a small set of local query handlers.
-- **Student profile.** Open a trace to see its latest mastery, concept count, and last recorded activity. The profile separates Progress & evidence, Concepts & graph, and Support & feedback. Progress pairs the timeline with the selected event. The shared Course progress bar runs from day zero to the end of the course. It carries the same day across Teacher, Student, Trace details, Course overview, and workspace fullscreen. Student analytics and assignments stop at that day. The pulsing marker shows the selected day, and the bar identifies the snapshot in use between observations. Fullscreen brings the detailed panels together and supports independent graph fullscreen.
-- **Course overview.** A compact trend at the bottom of Teacher shows mean recorded mastery across the active dataset. View course overview opens the activity breakdown and explains which observations count toward each day.
-- **Evidence.** Save a teacher note against a trace and selected event or concept. Optional image, PDF, and text attachments use browser storage and have a 1 MB limit per attachment.
-- **Reports and feedback.** Edit student and parent drafts separately and store their recipient addresses per trace. Email drafts open in your email app. Published student reports and approved feedback are visible in Student view in the same browser.
-- **Course setup.** Review a sample Canvas course map. The teaching options panel shows illustrative guidance.
-- **Trace imports.** Import prepared JSON or simulator CSV, with optional matching Markdown reports. Imported traces are session-scoped.
+[Watch the walkthrough](docs/media/walkthrough.mp4)
 
-## Structure
+To reproduce the screenshot, open **Trace details**, move **Course progress** to day 24, click **Fullscreen view**, and choose the day 17 quiz under **Inspect an event**.
 
-- `src/App.tsx` coordinates trace selection and views. `src/TraceProfile.tsx` and `src/CourseOverview.tsx` provide the individual and course summaries.
-- `src/TeacherHome.tsx`, `src/CourseWorkspace.tsx`, and `src/courseStore.ts` handle the teacher, reporting, and student workflows.
-- `src/Timeline.tsx`, `src/Inspector.tsx`, `src/ResearchPanels.tsx`, and `src/KnowledgeGraph.tsx` carry forward the research visualizer.
-- `src/data.ts`, `src/references.ts`, and `src/progressReport.ts` validate sources and derive displayed results.
-- `public/demo-data/` contains the standalone public demo fixtures. For authorized local research data, place a prepared export under `public/data/` and set `VITE_COURSELENS_DATA=data` in `.env.local`. Generate its overview with `python3 tools/summarize_course.py public/data`. Research exports and local environment settings are excluded from Git.
+![CourseLens teacher workspace with the progress brief for synthetic trace 206](docs/media/teacher.png)
 
-The app uses React, TypeScript, Vite, Apache ECharts, Zod, and CSS. Reports, contacts, and notes live in browser-local storage. Live Canvas sync, document extraction, account authentication, connected email delivery, and weight-space model updates remain future integrations.
+## How it works
+
+![A simulated trace is validated, filtered to the selected day, and read by the teacher and student views](docs/media/trace-flow.svg)
+
+The teacher workspace answers progress, assessment, and misconception questions with local query handlers. Trace details show the timeline and event evidence. The course overview summarizes recorded activity across traces.
+
+Reports, contacts, and notes stay in the current browser. Canvas setup uses a sample course map; the demo needs no account, API key, or real student records.
+
+## Development
 
 ```sh
 pnpm test
 pnpm build
 ```
 
-## Checkpoints
-
-- **v0.1.0** captures the teacher dashboard, progress questions, report workflow, detailed trace analytics, Google-inspired palette, and standalone public demo.
-- The current version adds a student profile, focused analytics sections, and a course-level trend and activity breakdown. The profile layout draws on [Panorama Student Success](https://www.panoramaed.com/products/student-success).
-
-Built with Codex & OpenAi Models
+Built with React, TypeScript, Vite, Zod, and ECharts. See [local research data setup](docs/research-data.md) for authorized exports.
